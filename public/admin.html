@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Admin Dashboard</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#f4f4f4;
+            padding:30px;
+        }
+
+        h1{
+            color:#0078D4;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+        }
+
+        th, td{
+            padding:12px;
+            border:1px solid #ccc;
+        }
+
+        th{
+            background:#0078D4;
+            color:white;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>📋 Private Student Records</h1>
+
+<table>
+
+    <thead>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Course</th>
+        </tr>
+
+    </thead>
+
+    <tbody id="studentTable"></tbody>
+
+</table>
+
+<script>
+
+async function loadStudents() {
+
+    const response = await fetch('/students');
+
+    const students = await response.json();
+
+    let rows = "";
+
+    students.forEach(student => {
+
+        rows += `
+        <tr>
+            <td>${student.id}</td>
+            <td>${student.name}</td>
+            <td>${student.age}</td>
+            <td>${student.course}</td>
+        </tr>
+        `;
+
+    });
+
+    document.getElementById("studentTable").innerHTML = rows;
+}
+
+loadStudents();
+
+</script>
+
+</body>
+
+</html>

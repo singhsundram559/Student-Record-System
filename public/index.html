@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Student Record Management System</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#f4f4f4;
+            padding:30px;
+        }
+
+        h1{
+            color:#0078D4;
+        }
+
+        form{
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            width:300px;
+        }
+
+        input{
+            width:100%;
+            padding:10px;
+            margin-top:10px;
+        }
+
+        button{
+            margin-top:15px;
+            padding:10px;
+            width:100%;
+            background:#0078D4;
+            color:white;
+            border:none;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>🎓 Student Record Management System</h1>
+
+<form id="studentForm">
+
+    <input type="text" id="name" placeholder="Enter Name" required>
+
+    <input type="number" id="age" placeholder="Enter Age" required>
+
+    <input type="text" id="course" placeholder="Enter Course" required>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+<script>
+
+document.getElementById("studentForm").addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const age = document.getElementById("age").value;
+    const course = document.getElementById("course").value;
+
+    await fetch('/addStudent', {
+
+        method: 'POST',
+
+        headers: {
+            'Content-Type':'application/json'
+        },
+
+        body: JSON.stringify({
+            name,
+            age,
+            course
+        })
+
+    });
+
+    alert("Form Submitted Successfully");
+
+    document.getElementById("studentForm").reset();
+
+});
+
+</script>
+
+</body>
+
+</html>
